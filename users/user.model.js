@@ -5,8 +5,11 @@ module.exports = model;
 function model(sequelize) {
     const attributes = {
         emailAddress: { type: DataTypes.STRING, allowNull: false },
-        username: { type: DataTypes.STRING, allowNull: false },
-        hash: { type: DataTypes.STRING, allowNull: false }
+        userName: { type: DataTypes.STRING, allowNull: false },
+        hash: { type: DataTypes.STRING, allowNull: false },
+        businessName: { type: DataTypes.STRING, allowNull: false },
+        phoneNumber: { type: DataTypes.STRING, allowNull: false },
+        officeAddress: { type: DataTypes.STRING, allowNull: false }
     };
 
     const options = {

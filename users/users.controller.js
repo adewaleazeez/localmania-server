@@ -19,7 +19,7 @@ module.exports = router;
 
 function authenticateSchema(req, res, next) {
     const schema = Joi.object({
-        username: Joi.string().required(),
+        userName: Joi.string().required(),
         password: Joi.string().required()
     });
     validateRequest(req, next, schema);
@@ -34,8 +34,11 @@ function authenticate(req, res, next) {
 function registerSchema(req, res, next) {
     const schema = Joi.object({
         emailAddress: Joi.string().required(),
-        username: Joi.string().required(),
-        password: Joi.string().min(6).required()
+        userName: Joi.string().required(),
+        password: Joi.string().min(6).required(),
+        businessName: Joi.string().required(),
+        phoneNumber: Joi.string().required(),
+        officeAddress: Joi.string().required()
     });
     validateRequest(req, next, schema);
 }
@@ -65,8 +68,11 @@ function getById(req, res, next) {
 function updateSchema(req, res, next) {
     const schema = Joi.object({
         emailAddress: Joi.string().empty(''),
-        username: Joi.string().empty(''),
-        password: Joi.string().min(6).empty('')
+        userName: Joi.string().empty(''),
+        password: Joi.string().min(6).empty(''),
+        businessName: Joi.string().empty(''),
+        phoneNumber: Joi.string().empty(''),
+        officeAddress: Joi.string().empty('')
     });
     validateRequest(req, next, schema);
 }
@@ -85,7 +91,7 @@ function _delete(req, res, next) {
 
 function getUserByNamesSchema(req, res, next) {
     const schema = Joi.object({
-        username: Joi.string().required(),
+        userName: Joi.string().required(),
         emailAddress: Joi.string().required()
     });
     validateRequest(req, next, schema);

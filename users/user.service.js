@@ -13,10 +13,16 @@ module.exports = {
     delete: _delete
 };
 
-async function authenticate({ username, password }) {
-    const user = await db.User.scope('withHash').findOne({ where: { username } });
-
-    if (!user || !(await bcrypt.compare(password, user.hash)))
+async function authenticate(params) {
+    let user = await db.User.scope('withHash').findOne({ where: {} });
+    if(params.userName.includes("@")){
+        user = await db.User.scope('withHash').findOne({ where: {  emailAddress: params.userName } });
+        console.log("new USER: "+user);
+    }else{
+        user = await db.User.scope('withHash').findOne({ where: {  userName: params.userName } });
+    }
+    
+    if (!user || !(await bcrypt.compare(params.password, user.hash)))
         throw 'Username or password is incorrect';
 
     // authentication successful
@@ -34,8 +40,8 @@ async function getById(id) {
 
 async function create(params) {
     // validate 
-    if (await db.User.findOne({ where: { username: params.username } })) {
-        throw 'Username "' + params.username + '" is already taken';
+    if (await db.User.findOne({ where: { userName: params.userName } })) {
+        throw 'Username "' + params.userName + '" is already taken';
     }
 
     if (await db.User.findOne({ where: { emailAddress: params.emailAddress } })) {
@@ -55,9 +61,9 @@ async function update(id, params) {
     const user = await getUser(id);
 
     // validate
-    const usernameChanged = params.username && user.username !== params.username;
-    if (usernameChanged && await db.User.findOne({ where: { username: params.username } })) {
-        throw 'Username "' + params.username + '" is already taken';
+    const usernameChanged = params.userName && user.userName !== params.userName;
+    if (usernameChanged && await db.User.findOne({ where: { userName: params.userName } })) {
+        throw 'Username "' + params.userName + '" is already taken';
     }
 
     const emailAddressChanged = params.emailAddress && user.emailAddress !== params.emailAddress;
@@ -95,8 +101,8 @@ function omitHash(user) {
     return userWithoutHash;
 }
 
-async function getUserByNames({ emailAddress, username }) {
-    const user = await db.User.findOne({ where: { emailAddress: emailAddress, username: username } });
+async function getUserByNames({ emailAddress, userName }) {
+    const user = await db.User.findOne({ where: { emailAddress: emailAddress, userName: userName } });
     console.log(user);
     return user;
 }
