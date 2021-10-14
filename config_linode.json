@@ -1,8 +1,8 @@
 ﻿{
     "database": {
-        "host": "localhost",
+        "host": "139.162.254.246",
         "port": 3306,
-        "user": "root",
+        "user": "admin",
         "password": "admins",
         "database": "localmaniadb"
     },

@@ -39,6 +39,7 @@ async function getById(id) {
 }
 
 async function create(params) {
+    console.log("params::: "+params);
     // validate 
     if (await db.User.findOne({ where: { userName: params.userName } })) {
         throw 'Username "' + params.userName + '" is already taken';

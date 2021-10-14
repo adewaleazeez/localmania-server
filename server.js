@@ -11,12 +11,10 @@ app.use(cors({ origin: 'http://localhost:3000' , credentials :  true,  methods: 
     origin: 'http://localhost:5000',
     optionsSuccessStatus: 200
 };*/
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //app.use(cors(corsOptions));
 ///app.use(cors({ origin: 'http://localhost:5000' }));
-
 
 // api routes
 app.use('/users', require('./users/users.controller'));

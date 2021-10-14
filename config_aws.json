@@ -1,9 +1,9 @@
 ﻿{
     "database": {
-        "host": "localhost",
+        "host": "database-1.cpfnyinepu7c.us-east-2.rds.amazonaws.com",
         "port": 3306,
-        "user": "root",
-        "password": "admins",
+        "user": "admin",
+        "password": "localmania",
         "database": "localmaniadb"
     },
     "secret": "d41c7675-a019-48a5-abcc-fd23095fc9c6"
